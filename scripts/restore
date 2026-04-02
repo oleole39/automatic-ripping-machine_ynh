@@ -15,6 +15,26 @@ ynh_script_progression "Restoring the app main directory..."
 
 ynh_restore "$install_dir"
 
+cpu_count_previous=$(ynh_app_setting_get --key=cpu_count)
+
+#=================================================
+# BUILD MAKEMKV
+#=================================================
+if [ $cpu_count -ne $cpu_count_previous ]; then
+	ynh_script_progression "Building MakeMKV (this can take some time)..."
+    ynh_safe_rm "$installd_dir/makemkv"
+	_build_makemkv
+fi
+
+#=================================================
+# BUILD HANDBRAKE CLI
+#=================================================
+if [ $cpu_count -ne $cpu_count_previous ]; then
+	ynh_script_progression "Building Handbrake CLI (this can take some time)..."
+    ynh_safe_rm "$installd_dir/handbrake"
+	_build_handbrake
+fi
+
 chown -R "$app:$app" "$install_dir"
 
 #=================================================

@@ -1,3 +1,1 @@
-This is a dummy admin doc for this app
-
-The app install dir is `__INSTALL_DIR__`
+If this hosting machine has a CPU with Intel QSV (Quick-Sync Video) capability, or a GPU with AMD VCE (Video Coding Engine) or NVIDIA NVENC capabilities, you may want to create a custom configuration so that A.R.M. makes use of it to increase transcoding performances. Here is [upstream related documentation](https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki/#:~:text=Hardware Configuration).

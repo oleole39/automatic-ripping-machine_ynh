@@ -34,3 +34,8 @@ function _build_handbrake()
         make --directory=build install
     popd
 }
+
+function _read_manifest_resource_version()
+{
+    ynh_read_manifest "resources.sources.$1.url" | grep -o "[0-9]\{1,2\}\.[0-9]\{1,2\}\.[0-9]\{1,2\}"
+}

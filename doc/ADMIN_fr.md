@@ -1,3 +1,1 @@
-Ceci est une fausse doc d'admin pour cette app
-
-Le dossier d'install de l'app est `__INSTALL_DIR__`
+Si cette machine est dotée d'un processeur comprenant la fonctionnalité Intel QSV (Quick-Sync Video), ou d'une carte graphique avec les fonctionnalités AMD VCE (Video Coding Engine) ou NVIDIA NVENC, vous pourriez vouloir créer une configuration personnalisée afin qu'A.R.M. en fasse usage afin d'améliorer les performance du transcodage. Voici la [documentation liée du projet source](https://github.com/automatic-ripping-machine/automatic-ripping-machine/wiki/#:~:text=Hardware Configuration).

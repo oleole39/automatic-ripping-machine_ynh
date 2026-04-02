@@ -11,6 +11,14 @@ source /usr/share/yunohost/helpers
 # INITIALIZE AND STORE SETTINGS
 #=================================================
 
+ynh_app_setting_set --key=cpu_count --value=$cpu_count
+
+makemkv_version=$(_read_manifest_resource_version "makemkv_bin")
+ynh_app_setting_set --key=makemkv_version --value=$makemkv_version
+
+handbrake_version=$(_read_manifest_resource_version "handbrake")
+ynh_app_setting_set --key=handbrake_version --value=$handbrake_version
+
 fetch_video_metadata_externally="false"
 ynh_app_setting_set --key=fetch_video_metadata_externally --value=$fetch_video_metadata_externally
 
