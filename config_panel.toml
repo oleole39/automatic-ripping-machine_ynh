@@ -1,0 +1,159 @@
+#:schema https://github.com/YunoHost/apps/raw/main/schemas/config_panel.v1.schema.json
+
+version = "1.0"
+
+[main]
+name.en = "Main configuration"
+name.fr = "Configuration principale"
+
+    [main.general]
+    name.en = "General"
+    name.en = "Général"
+
+        [main.general.date_format]
+        ask.en = "Date format"
+        ask.fr = "Format de date"
+        type = "string"
+        help = "cf. https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes"
+        default = "%d-%m-%Y %H:%M:%S"
+		bind = "DATE_FORMAT:__INSTALL_DIR__/app_config/arm.yaml"
+
+        [main.general.allow_duplicate_rips]
+        ask.en = "Allow duplicates rips"
+        ask.fr = "Autoriser les rips en doublons"
+        type = "boolean"
+        yes = "true"
+        no = "false"
+        default = "false"
+		bind = "ALLOW_DUPLICATES:__INSTALL_DIR__/app_config/arm.yaml"
+
+        [main.general.auto_eject]
+        ask.en = "Eject disc after rip is completed"
+        ask.fr = "Ejecter le disque une fois le rip terminé"
+        type = "boolean"
+        yes = "true"
+        no = "false"
+        default = "true"
+		bind = "AUTO_EJECT:__INSTALL_DIR__/app_config/arm.yaml"
+
+        [main.general.notifications_config_path]
+        ask.en = "Activer le service de notifications"
+        ask.fr = "Format de date"
+        type = "boolean"
+        yes = "__INSTALL_DIR__/app_config/apprise.yaml"
+        no = ""
+        help.en = "ARM interfaces with various notifications endpoints you will have to configure as well in `/var/www/__APP__/app_config/apprise.yaml`"
+        help.fr = "ARM s'interface avec différents services de notifications que vous devrez également configurer dans `/var/www/__APP__/app_config/apprise.yaml`"
+        default = ""
+		bind = "APPRISE:__INSTALL_DIR__/app_config/arm.yaml"
+
+    [main.video]
+    name.en = "Video discs"
+    name.fr = "Disques vidéo"
+
+        [main.video.fetch_video_metadata_externally]
+        ask.en = "Fetch metadata from third party providers"
+        ask.fr = "Récupérer des métadonnées de fournisseurs tiers"
+        type = "boolean"
+        help.en = "Allow querying ARM project's crc64 database and OMDB or TMMDB databases to get video metadata"
+        help.fr = "Autorise les requêtes vers la BDD en ligne du projet ARM et celles d'OMDB ou TMDB pour récuperer les métadonnées des vidéos."
+        yes = "true"
+        no = "false"
+        default = "false"
+		bind = "GET_VIDEO_TITLE:__INSTALL_DIR__/app_config/arm.yaml"
+
+        [main.video.omdb_api_key]
+        ask.en = "OMDB API key"
+        ask.fr = "Clé d'API OMDB"
+        type = "string"
+        help = "cf. https://www.omdbapi.com/apikey.aspx"
+        default = ""
+        visible = "fetch_video_metadata_externally"
+		bind = "OMDB_API_KEY:__INSTALL_DIR__/app_config/arm.yaml"
+
+        [main.video.tmdb_api_key]
+        ask.en = "TMDB API key"
+        ask.fr = "Clé d'API TMDB"
+        type = "string"
+        help = "cf. https://www.themoviedb.org/settings/api"
+        default = ""
+        visible = "fetch_video_metadata_externally"
+		bind = "TMDB_API_KEY:__INSTALL_DIR__/app_config/arm.yaml"
+
+        [main.video.min_length]
+        ask.en = "Minimum length (seconds)"
+        ask.fr = "Durée minimale (secondes)"
+        type = "number"
+        help.en = "Do not rip video tracks below this length."
+        help.fr = "Ne pas ripper les pistes vidéos plus courtes que cette durée."
+        default = 0
+		bind = "MINLENGTH:__INSTALL_DIR__/app_config/arm.yaml"
+
+        [main.video.max_length]
+        ask.en = "Maximum length (seconds)"
+        ask.fr = "Durée maximale (secondes)"
+        type = "number"
+        help.en = "Do not rip video tracks above this length."
+        help.fr = "Ne pas ripper les pistes vidéos plus longues que cette durée."
+        default = 99999
+		bind = "MAXLENGTH:__INSTALL_DIR__/app_config/arm.yaml"
+
+        [main.video.skip_video_transcoding]
+        ask.en = "Enable video transcoding"
+        ask.fr = "Récupérer des métadonnées fournisseurs tierces"
+        type = "boolean"
+        help.en = "Whether to transcode the video with Handbrake after extraction with MakeMKV. Transcoding being the most demanding task in terms of hardware requirements."
+        help.fr = "Transcoder les vidéos avec Handbrake après leur extraction avec MakeMKV. Le transcodage est l'opération la plus exigente en termes de besoins matériels.
+        yes = "false"
+        no = "true"
+        default = "true"
+		bind = "SKIP_TRANSCODE:__INSTALL_DIR__/app_config/arm.yaml"
+
+        [main.video.handbrake_preset_dvd]
+        ask.en = "DVD transcoding profile"
+        ask.fr = "Profil de transcodage pour les DVD"
+        type = "string"
+        help = "cf. https://handbrake.fr/docs/en/latest/technical/official-presets.html"
+        default = "HQ 720p30 Surround"
+        visible = "skip_video_transcoding == 'false'"
+		bind = "HB_PRESET_DVD:__INSTALL_DIR__/app_config/arm.yaml"
+
+        [main.video.handbrake_preset_bd]
+        ask.en = "Bluray transcoding profile"
+        ask.fr = "Profil de transcodage pour les Bluray"
+        type = "string"
+        help = "cf. https://handbrake.fr/docs/en/latest/technical/official-presets.html"
+        default = "HQ 1080p30 Surround"
+        visible = "skip_video_transcoding == 'false'"
+		bind = "HB_PRESET_BD:__INSTALL_DIR__/app_config/arm.yaml"
+
+    [main.audio]
+    name = "Audio CDs"
+    name = "CD Audio"
+
+        [main.audio.audio_cd_output_format]
+        ask.en = "Conversion format "
+        ask.fr = "Format de conversion"
+        type = "string"
+        help.en = "You can choose among vorbis, mp3, flac, spx, mpc, m4a, wav and opus. You can also enter several values separated by a comma if you want multiple output formats."
+        help.fr = "Vous pouvez choisir entre vorbis, mp3, flac, spx, mpc, m4a, wav and opus. Il est aussi possible d'indiquer plusieurs valeurs séparées par une virgule si vous voulez obtenir plusieurs formats à la sortie."
+        default = "flac"
+		bind = "OUTPUTTYPE:__INSTALL_DIR__/app_config/.abcde.conf"
+
+        [main.audio.audio_cd_trackname_format]
+        ask.en = "Trackname format"
+        ask.fr = "Format de nom de piste"
+        type = "string"
+        help.en = "Available variables are GENRE, ALBUMFILE, ARTISTFILE, TRACKFILE, TRACKNUM, and YEAR."
+        help.fr = "Les variables disponibles sont GENRE, ALBUMFILE, ARTISTFILE, TRACKFILE, TRACKNUM, and YEAR."
+        default = "${ARTISTFILE}/${ALBUMFILE} (${YEAR})/${TRACKNUM} - ${TRACKFILE}"
+		bind = "OUTPUTFORMAT:__INSTALL_DIR__/app_config/.abcde.conf"
+
+        [main.audio.audio_cd_trackname_format_va]
+        ask.en = "Trackname format (compilation album)"
+        ask.fr = "Format de nom de piste (album de compilation)
+        type = "string"
+        help.en = "Available variables are GENRE, ALBUMFILE, ARTISTFILE, TRACKFILE, TRACKNUM, and YEAR."
+        help.fr = "Les variables disponibles sont GENRE, ALBUMFILE, ARTISTFILE, TRACKFILE, TRACKNUM, and YEAR."
+        default = "Various artists/${ALBUMFILE}/${TRACKNUM} - ${ARTISTFILE} - ${TRACKFILE}"
+		bind = "VAOUTPUTFORMAT:__INSTALL_DIR__/app_config/.abcde.conf"

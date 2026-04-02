@@ -3,3 +3,34 @@
 #=================================================
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
+
+#Count machine's CPU cores
+cpu_count=$(nproc --all)
+
+function _build_makemkv()
+{
+    ynh_setup_source --dest_dir="$install_dir/makemkv/bin" --source_id="makemkv_bin"
+    pushd "$install_dir/makemkv/bin"
+        mkdir -p ./tmp
+        ./configure >> /dev/null  2>&1
+        make -s -j"${cpu_count}"
+        make install
+    popd
+
+    ynh_setup_source --dest_dir="$install_dir/makemkv/oss" --source_id="makemkv_oss"
+    pushd "$install_dir/makemkv/oss"
+        mkdir -p ./tmp
+        echo "yes" >> ./tmp/eula_accepted
+        make -s -j"${cpu_count}"
+        make install
+    popd
+}
+
+function _build_handbrake()
+{
+    ynh_setup_source --dest_dir="$install_dir/handbrake" --source_id="handbrake"
+    pushd "$install_dir/handbrake"
+        ./configure --launch-jobs="${cpu_count}" --launch --enable-qsv --enable-vce --disable-gtk
+        make --directory=build install
+    popd
+}

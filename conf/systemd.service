@@ -1,18 +1,22 @@
 [Unit]
-Description=Small description of the service
-After=network.target
+Description=Automatic ripping machine UI
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 Type=simple
 User=__APP__
 Group=__APP__
+EnvironmentFile=__INSTALL_DIR__/app_config/.env
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/script
+ExecStartPre=/bin/bash -xc '/usr/bin/systemctl is-active --quiet armui.service && exit 1 || exit 0'
+ExecStart=/opt/arm/venv/bin/python3 /opt/arm/arm/runui.py
+Restart=always
+RestartSec=3
 StandardOutput=append:/var/log/__APP__/__APP__.log
 StandardError=inherit
+#AmbientCapabilities=CAP_NET_BIND_SERVICE
 
-### Depending on specificities of your service/app, you may need to tweak these
-### .. but this should be a good baseline
 # Sandboxing options to harden security
 # Details for these options: https://www.freedesktop.org/software/systemd/man/systemd.exec.html
 NoNewPrivileges=yes
