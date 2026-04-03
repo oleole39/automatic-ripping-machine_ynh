@@ -15,7 +15,7 @@ ynh_script_progression "Removing system configurations related to $app..."
 # Unmount drives and remove app-related fstab entries
 for dev in /dev/sr?; do
     umount -f "/mnt$dev"
-    sed -i "/${dev}    /mnt${dev}    udf,iso9660    defaults,users,utf8,ro    0    0/d" /etc/fstab
+    sed -i "|${dev}    /mnt${dev}    udf,iso9660    defaults,users,utf8,ro    0    0|d" /etc/fstab
 done
 
 # Remove udev rule
