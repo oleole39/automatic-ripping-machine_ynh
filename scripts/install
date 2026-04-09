@@ -11,58 +11,58 @@ source /usr/share/yunohost/helpers
 # INITIALIZE AND STORE SETTINGS
 #=================================================
 
-ynh_app_setting_set --key=cpu_count --value=$cpu_count
+ynh_app_setting_set --key=cpu_count --value="$cpu_count"
 
 makemkv_version=$(_read_manifest_resource_version "makemkv_bin")
-ynh_app_setting_set --key=makemkv_version --value=$makemkv_version
+ynh_app_setting_set --key=makemkv_version --value="$makemkv_version"
 
 handbrake_version=$(_read_manifest_resource_version "handbrake")
-ynh_app_setting_set --key=handbrake_version --value=$handbrake_version
+ynh_app_setting_set --key=handbrake_version --value="$handbrake_version"
 
 fetch_video_metadata_externally="false"
-ynh_app_setting_set --key=fetch_video_metadata_externally --value=$fetch_video_metadata_externally
+ynh_app_setting_set --key=fetch_video_metadata_externally --value="$fetch_video_metadata_externally"
 
 skip_video_transcoding="false"
-ynh_app_setting_set --key=skip_video_transcoding --value=$skip_video_transcoding
+ynh_app_setting_set --key=skip_video_transcoding --value="$skip_video_transcoding"
 
 min_video_length=600
-ynh_app_setting_set --key=min_video_length --value=$min_video_length
+ynh_app_setting_set --key=min_video_length --value="$min_video_length"
 
 max_video_length=99999
-ynh_app_setting_set --key=max_video_length --value=$max_video_length
+ynh_app_setting_set --key=max_video_length --value="$max_video_length"
 
 date_format="%m-%d-%Y %H:%M:%S"
-ynh_app_setting_set --key=date_format --value=$date_format
+ynh_app_setting_set --key=date_format --value="$date_format"
 
 allow_duplicate_rips="false"
-ynh_app_setting_set --key=allow_duplicate_rips --value=$allow_duplicate_rips
+ynh_app_setting_set --key=allow_duplicate_rips --value="$allow_duplicate_rips"
 
 auto_eject="true"
-ynh_app_setting_set --key=auto_eject --value=$auto_eject
+ynh_app_setting_set --key=auto_eject --value="$auto_eject"
 
 handbrake_preset_dvd="HQ 720p30 Surround"
-ynh_app_setting_set --key=handbrake_preset_dvd --value=$handbrake_preset_dvd
+ynh_app_setting_set --key=handbrake_preset_dvd --value="$handbrake_preset_dvd"
 
 handbrake_preset_bd="HQ 1080p30 Surround"
-ynh_app_setting_set --key=handbrake_preset_bd --value=$handbrake_preset_bd
+ynh_app_setting_set --key=handbrake_preset_bd --value="$handbrake_preset_bd"
 
 omdb_api_key=""
-ynh_app_setting_set --key=omdb_api_key --value=$omdb_api_key
+ynh_app_setting_set --key=omdb_api_key --value="$omdb_api_key"
 
 tmdb_api_key=""
-ynh_app_setting_set --key=tmdb_api_key --value=$tmdb_api_key
+ynh_app_setting_set --key=tmdb_api_key --value="$tmdb_api_key"
 
 audio_cd_output_format="flac"
-ynh_app_setting_set --key=audio_cd_output_format --value=$audio_cd_output_format
+ynh_app_setting_set --key=audio_cd_output_format --value="$audio_cd_output_format"
 
 audio_cd_trackname_format='${ARTISTFILE}/${ALBUMFILE}/${TRACKNUM} - ${TRACKFILE}'
-ynh_app_setting_set --key=audio_cd_trackname_format --value=$audio_cd_trackname_format
+ynh_app_setting_set --key=audio_cd_trackname_format --value="$audio_cd_trackname_format"
 
 audio_cd_trackname_format_va='Various ${ALBUMFILE}/${TRACKNUM} ${ARTISTFILE} ${TRACKFILE}'
-ynh_app_setting_set --key=audio_cd_trackname_format_va --value=$audio_cd_trackname_format_va
+ynh_app_setting_set --key=audio_cd_trackname_format_va --value="$audio_cd_trackname_format_va"
 
 notifications_config_path=""
-ynh_app_setting_set --key=notifications_config_path --value=$notifications_config_path
+ynh_app_setting_set --key=notifications_config_path --value="$notifications_config_path"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

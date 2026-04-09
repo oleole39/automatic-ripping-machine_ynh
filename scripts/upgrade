@@ -31,7 +31,7 @@ if $(dpkg --compare-versions "$makemkv_version_previous" "ne" "$makemkv_version"
     ynh_script_progression "Building MakeMKV (this can take some time)..."
   
     _build_makemkv
-    ynh_app_setting_set --key=makemkv_version --value=$makemkv_version
+    ynh_app_setting_set --key=makemkv_version --value="$makemkv_version"
 fi
 
 #=================================================
@@ -44,7 +44,7 @@ if $(dpkg --compare-versions "$handbrake_version_previous" "ne" "$handbrake_vers
     ynh_script_progression "Building Handbrake CLI (this can take some time)..."
   
     _build_handbrake
-    ynh_app_setting_set --key=handbrake_version --value=$handbrake_version
+    ynh_app_setting_set --key=handbrake_version --value="$handbrake_version"
 fi
 
 #=================================================
