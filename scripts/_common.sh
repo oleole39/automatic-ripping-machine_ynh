@@ -20,7 +20,8 @@ function _build_makemkv()
     ynh_setup_source --dest_dir="$install_dir/makemkv/oss" --source_id="makemkv_oss"
     pushd "$install_dir/makemkv/oss"
         mkdir -p ./tmp
-        ynh_hide_warnings ./configure
+        #~ ynh_hide_warnings ./configure
+        ./configure
         make -s -j"${cpu_count}"
         make install
     popd
@@ -30,7 +31,8 @@ function _build_handbrake()
 {
     ynh_setup_source --dest_dir="$install_dir/handbrake" --source_id="handbrake"
     pushd "$install_dir/handbrake"
-        ynh_hide_warnings ./configure --launch-jobs="${cpu_count}" --launch --enable-qsv --enable-vce --disable-gtk
+        #~ ynh_hide_warnings ./configure --launch-jobs="${cpu_count}" --launch --enable-qsv --enable-vce --disable-gtk
+        ./configure --launch-jobs="${cpu_count}" --launch --enable-qsv --enable-vce --disable-gtk
         make --directory=build install
     popd
 }
