@@ -12,7 +12,7 @@ function _build_makemkv()
     ynh_setup_source --dest_dir="$install_dir/makemkv/bin" --source_id="makemkv_bin"
     pushd "$install_dir/makemkv/bin"
         mkdir -p ./tmp
-        ./configure >> /dev/null  2>&1
+        ./configure #>> /dev/null  2>&1
         make -s -j"${cpu_count}"
         make install
     popd
