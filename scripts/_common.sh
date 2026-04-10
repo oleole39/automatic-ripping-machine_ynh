@@ -12,6 +12,7 @@ function _build_makemkv()
     ynh_setup_source --dest_dir="$install_dir/makemkv/bin" --source_id="makemkv_bin"
     pushd "$install_dir/makemkv/bin"
         mkdir -p ./tmp
+        echo "yes" >> ./tmp/eula_accepted
         make -s -j"${cpu_count}"
         make install
     popd
@@ -19,8 +20,7 @@ function _build_makemkv()
     ynh_setup_source --dest_dir="$install_dir/makemkv/oss" --source_id="makemkv_oss"
     pushd "$install_dir/makemkv/oss"
         mkdir -p ./tmp
-        ./configure #>> /dev/null  2>&1
-        echo "yes" >> ./tmp/eula_accepted
+        ./configure >> /dev/null  2>&1
         make -s -j"${cpu_count}"
         make install
     popd
