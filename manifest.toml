@@ -62,10 +62,11 @@ non-free-dependencies.fr = "Pour ripper des DVD ou des Bluray, MakeDVD est utili
 	rename = "makemkv-oss.tar.gz"
     
     [resources.sources.handbrake]
-    url = "https://github.com/HandBrake/HandBrake/archive/refs/tags/1.11.1.tar.gz"
-    sha256 = "e2dd934e295e752d9a16b46f915e56a0e641dc02b3634319a1c63a32bd84e337"
+    url = "https://github.com/HandBrake/HandBrake/releases/download/1.11.1/HandBrake-1.11.1-source.tar.bz2"
+    sha256 = "4ff6a8a57c9b1cea51025306e313eee423b0fa1a8b7799aeaa8d4d7c457a7310"
     rename = "handbrake.tar.gz"
-    autoupdate.strategy = "latest_github_tag"
+    autoupdate.strategy = "latest_github_release"
+    autoupdate.asset = "HandBrake-.*-source.tar.bz2"
 
     [resources.system_user]
 
