@@ -19,9 +19,8 @@ function _build_makemkv()
 
     ynh_setup_source --dest_dir="$install_dir/makemkv/oss" --source_id="makemkv_oss"
     pushd "$install_dir/makemkv/oss"
-        mkdir -p ./tmp
         #~ ynh_hide_warnings ./configure
-        ./configure
+        ./configure --disable-gui
         make -s -j"${cpu_count}"
         make install
     popd
