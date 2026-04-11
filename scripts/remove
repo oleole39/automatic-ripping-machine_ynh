@@ -15,7 +15,7 @@ ynh_script_progression "Removing system configurations related to $app..."
 # Unmount drives and remove app-related fstab entries
 for dev in /dev/sr?; do
     umount -f "/mnt$dev"
-    sed -i "@${dev}    /mnt${dev}    udf,iso9660    defaults,users,utf8,ro    0    0@d" /etc/fstab
+    sed -i "\@${dev}    /mnt${dev}    udf,iso9660    defaults,users,utf8,ro    0    0@d" /etc/fstab
 done
 
 # Remove udev rule
@@ -30,6 +30,28 @@ fi
 ynh_config_remove_systemd
 
 ynh_config_remove_nginx
+
+#=================================================
+# REMOVE APP SYSTEM FILES
+#=================================================
+ynh_script_progression "Removing system files related to $app..."
+
+# MakeMKV bin
+unlink sdftool
+ynh_safe_rm /usr/bin/makemkvcon
+ynh_safe_rm /usr/bin/mmdtsdec
+ynh_safe_rm /usr/share/MakeMKV
+
+# MakeMKV oss
+ynh_safe_rm /usr/bin/mmgplsrv
+ynh_safe_rm /usr/bin/mmccextr
+ynh_safe_rm /usr/lib/libmmbd.so.0
+ynh_safe_rm /usr/lib/libmakemkv.so.1
+ynh_safe_rm /usr/lib/libdriveio.so.0
+ldconfig
+
+# Handbrake
+ynh_safe_rm /usr/local/bin/HandBrakeCLI
 
 #=================================================
 # END OF SCRIPT
