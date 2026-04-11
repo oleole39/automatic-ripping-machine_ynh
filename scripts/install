@@ -69,6 +69,9 @@ ynh_app_setting_set --key=notifications_config_path --value="$notifications_conf
 #=================================================
 ynh_script_progression "Setting up source files..."
 
+# Install libdvdcss, used by libdvd-pkg which was installed via apt
+dpkg-reconfigure --frontend=noninteractive libdvd-pkg
+
 # Download, check integrity, uncompress and patch the source from manifest.toml
 ynh_setup_source --dest_dir="$install_dir"
 
@@ -91,6 +94,7 @@ _build_handbrake
 #=================================================
 ynh_script_progression "Adding $app's configuration files..."
 
+mkdir -p "$install_dir/app_config"
 ynh_config_add --template=".env" --destination="$install_dir/app_config/.env"
 ynh_config_add --template="arm.yaml" --destination="$install_dir/app_config/arm.yaml"
 ynh_config_add --template="apprise.yaml" --destination="$install_dir/app_config/apprise.yaml"
