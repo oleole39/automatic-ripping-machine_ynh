@@ -75,7 +75,7 @@ ynh_setup_source --dest_dir="$install_dir"
 
 # Add dependencies' `requirements.txt` file to `arm-dependencies` folder
 ynh_setup_source --dest_dir="$install_dir/arm-dependencies" --source_id="arm_dependencies"
-find "$install_dir/arm-dependencies" -maxdepth 1 -type d ! -name . -exec rm --recursive {} + #remove all but parent folder
+find "$install_dir/arm-dependencies" -maxdepth 1 -type d ! -name "." -name "arm-dependencies" -exec rm --recursive {} + #remove all but parent folder
 find "$install_dir/arm-dependencies" -maxdepth 1 -type f ! -name 'requirement.txt' -exec rm {} + #remove all but requirement.txt
 
 #=================================================
