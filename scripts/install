@@ -11,8 +11,6 @@ source /usr/share/yunohost/helpers
 # INITIALIZE AND STORE SETTINGS
 #=================================================
 
-ynh_app_setting_set --key=cpu_count --value="$cpu_count"
-
 makemkv_version=$(_read_manifest_resource_version "makemkv_bin")
 ynh_app_setting_set --key=makemkv_version --value="$makemkv_version"
 
@@ -77,8 +75,12 @@ ynh_setup_source --dest_dir="$install_dir"
 
 # Add dependencies' `requirements.txt` file to `arm-dependencies` folder
 ynh_setup_source --dest_dir="$install_dir/arm-dependencies" --source_id="arm_dependencies"
-find "$install_dir/arm-dependencies" ! -name . -type d -exec rm --recursive {} + #remove all but parent folder
-find "$install_dir/arm-dependencies" ! -name 'requirement.txt' -type f -exec rm {} + #remove all but requirement.txt
+#~ find "$install_dir/arm-dependencies" -type d ! -name . -exec rm --recursive {} + #remove all but parent folder
+find "$install_dir/arm-dependencies" -type d ! -name . -print #remove all but parent folder
+find "$install_dir/arm-dependencies" -type f ! -name 'requirement.txt' -print #remove all but requirement.txt
+#~ find "$install_dir/arm-dependencies" -type f ! -name 'requirement.txt' -exec rm {} + #remove all but requirement.txt
+
+ynh_die "test stop"
 
 #=================================================
 # BUILD MAKEMKV
