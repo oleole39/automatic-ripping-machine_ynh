@@ -24,7 +24,7 @@ function _build_makemkv()
         make install
     popd
     
-    ynh_safe_rm "$install_dir/makemkv" 
+    ynh_safe_rm "$install_dir/makemkv" #clean build folder after make install
 }
 
 function _build_handbrake()
@@ -35,7 +35,7 @@ function _build_handbrake()
         make --directory=build install
     popd
     
-    ynh_safe_rm "$install_dir/handbrake" 
+    ynh_safe_rm "$install_dir/handbrake" #clean build folder after make install
 }
 
 function _read_manifest_resource_version()
