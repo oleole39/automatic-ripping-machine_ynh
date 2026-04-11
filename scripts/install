@@ -77,8 +77,8 @@ ynh_setup_source --dest_dir="$install_dir"
 
 # Add dependencies' `requirements.txt` file to `arm-dependencies` folder
 ynh_setup_source --dest_dir="$install_dir/arm-dependencies" --source_id="arm_dependencies"
-find "$install_dir/arm-dependencies" ! -name . -type d -exec ynh_safe_rm {} + #remove all but parent folder
-find "$install_dir/arm-dependencies" ! -name 'requirement.txt' -type f -exec ynh_safe_rm {} + #remove all but requirement.txt
+find "$install_dir/arm-dependencies" ! -name . -type d -exec rm --recursive {} + #remove all but parent folder
+find "$install_dir/arm-dependencies" ! -name 'requirement.txt' -type f -exec rm {} + #remove all but requirement.txt
 
 #=================================================
 # BUILD MAKEMKV
