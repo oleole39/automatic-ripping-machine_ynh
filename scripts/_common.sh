@@ -23,6 +23,8 @@ function _build_makemkv()
         make -s -j"${cpu_count}"
         make install
     popd
+    
+    ynh_safe_rm "$install_dir/makemkv" 
 }
 
 function _build_handbrake()
@@ -32,6 +34,8 @@ function _build_handbrake()
         ./configure --launch-jobs="${cpu_count}" --launch --enable-qsv --enable-vce --disable-gtk
         make --directory=build install
     popd
+    
+    ynh_safe_rm "$install_dir/handbrake" 
 }
 
 function _read_manifest_resource_version()
