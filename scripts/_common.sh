@@ -4,7 +4,7 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-#Count machine's CPU cores
+#Number of CPU cores on the machine - the highest, the quickest it will compile
 cpu_count=$(nproc --all)
 
 function _build_makemkv()
@@ -19,7 +19,6 @@ function _build_makemkv()
 
     ynh_setup_source --dest_dir="$install_dir/makemkv/oss" --source_id="makemkv_oss"
     pushd "$install_dir/makemkv/oss"
-        #~ ynh_hide_warnings ./configure
         ./configure --disable-gui
         make -s -j"${cpu_count}"
         make install
@@ -30,7 +29,6 @@ function _build_handbrake()
 {
     ynh_setup_source --dest_dir="$install_dir/handbrake" --source_id="handbrake"
     pushd "$install_dir/handbrake"
-        #~ ynh_hide_warnings ./configure --launch-jobs="${cpu_count}" --launch --enable-qsv --enable-vce --disable-gtk
         ./configure --launch-jobs="${cpu_count}" --launch --enable-qsv --enable-vce --disable-gtk
         make --directory=build install
     popd
