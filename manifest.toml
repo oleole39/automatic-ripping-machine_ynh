@@ -51,6 +51,12 @@ non-free-dependencies.fr = "Pour ripper des DVD ou des Bluray, MakeDVD est utili
     rename = "automatic-ripping-machine.tar.gz"
     autoupdate.strategy = "latest_github_tag"
     
+    [resources.sources.arm_dependencies]
+    url = "https://github.com/automatic-ripping-machine/arm-dependencies/archive/f5a5c9138371fc842b2012ff3e32c387a6784b5c.tar.gz"
+    sha256 = "c0b380a85172842ef045160fcd888820db7834067f9904445da492c9cb007c83"
+    rename = "arm_dependencies.tar.gz"
+    autoupdate.strategy = "latest_github_commit"
+
     [resources.sources.makemkv_bin]
     url = "https://www.makemkv.com/download/makemkv-bin-1.18.3.tar.gz"
     sha256 = "c1ee720ae91b276a7c89be861146c5b934631831e8d6c8f453406435724e92bd"
@@ -64,7 +70,7 @@ non-free-dependencies.fr = "Pour ripper des DVD ou des Bluray, MakeDVD est utili
     [resources.sources.handbrake]
     url = "https://github.com/HandBrake/HandBrake/releases/download/1.11.1/HandBrake-1.11.1-source.tar.bz2"
     sha256 = "4ff6a8a57c9b1cea51025306e313eee423b0fa1a8b7799aeaa8d4d7c457a7310"
-    rename = "handbrake.tar.gz"
+    rename = "handbrake.tar.bz2"
     autoupdate.strategy = "latest_github_release"
     autoupdate.asset = "HandBrake-.*-source.tar.bz2"
 
