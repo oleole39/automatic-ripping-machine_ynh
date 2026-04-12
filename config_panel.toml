@@ -103,7 +103,7 @@ name.fr = "Configuration principale"
         ask.fr = "Récupérer des métadonnées fournisseurs tierces"
         type = "boolean"
         help.en = "Whether to transcode the video with Handbrake after extraction with MakeMKV. Transcoding being the most demanding task in terms of hardware requirements."
-        help.fr = "Transcoder les vidéos avec Handbrake après leur extraction avec MakeMKV. Le transcodage est l'opération la plus exigente en termes de besoins matériels.
+        help.fr = "Transcoder les vidéos avec Handbrake après leur extraction avec MakeMKV. Le transcodage est l'opération la plus exigente en termes de besoins matériels."
         yes = "false"
         no = "true"
         default = "true"
@@ -151,7 +151,7 @@ name.fr = "Configuration principale"
 
         [main.audio.audio_cd_trackname_format_va]
         ask.en = "Trackname format (compilation album)"
-        ask.fr = "Format de nom de piste (album de compilation)
+        ask.fr = "Format de nom de piste (album de compilation)"
         type = "string"
         help.en = "Available variables are GENRE, ALBUMFILE, ARTISTFILE, TRACKFILE, TRACKNUM, and YEAR."
         help.fr = "Les variables disponibles sont GENRE, ALBUMFILE, ARTISTFILE, TRACKFILE, TRACKNUM, and YEAR."
