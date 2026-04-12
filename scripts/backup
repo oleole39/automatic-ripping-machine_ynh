@@ -14,6 +14,22 @@ ynh_print_info "Declaring files to be backed up..."
 # BACKUP THE APP MAIN DIR
 #=================================================
 
+# Backup dependencies binaries
+mkdir -p "$install_dir/makemkv/bin"
+cp /usr/bin/makemkvcon "$install_dir/makemkv/bin/makemkvcon"
+cp /usr/bin/mmdtsdec "$install_dir/makemkv/bin/mmdtsdec"
+cp /usr/share/MakeMKV "$install_dir/makemkv/bin/MakeMKV"
+
+mkdir -p "$install_dir/makemkv/oss"
+cp /usr/bin/mmgplsrv "$install_dir/makemkv/oss/mmgplsrv"
+cp /usr/bin/mmccextr "$install_dir/makemkv/oss/mmccextr"
+cp /usr/lib/libmmbd.so.0 "$install_dir/makemkv/oss/libmmbd.so.0"
+cp /usr/lib/libdriveio.so.0 "$install_dir/makemkv/oss/libdriveio.so.0"
+cp /usr/lib/libmakemkv.so.1 "$install_dir/makemkv/oss/libdriveio.so.1"
+
+mkdir -p "$install_dir/handbrake"
+cp /usr/local/bin/HandBrakeCLI "$install_dir/handbrake/HandBrakeCLI"
+
 ynh_backup "$install_dir"
 
 #=================================================

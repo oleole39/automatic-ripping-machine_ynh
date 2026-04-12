@@ -15,26 +15,6 @@ ynh_script_progression "Restoring the app main directory..."
 
 ynh_restore "$install_dir"
 
-cpu_count_previous=$(ynh_app_setting_get --key=cpu_count)
-
-#=================================================
-# BUILD MAKEMKV
-#=================================================
-if [ $cpu_count -ne $cpu_count_previous ]; then
-	ynh_script_progression "Building MakeMKV (this can take some time)..."
-    ynh_safe_rm "$installd_dir/makemkv"
-	_build_makemkv
-fi
-
-#=================================================
-# BUILD HANDBRAKE CLI
-#=================================================
-if [ $cpu_count -ne $cpu_count_previous ]; then
-	ynh_script_progression "Building Handbrake CLI (this can take some time)..."
-    ynh_safe_rm "$installd_dir/handbrake"
-	_build_handbrake
-fi
-
 chown -R "$app:$app" "$install_dir"
 
 #=================================================
@@ -49,8 +29,24 @@ chown -R "$app:$app" "$data_dir"
 #=================================================
 # RESTORE SYSTEM CONFIGURATION
 #=================================================
-
 ynh_script_progression "Restoring system configurations related to $app..."
+
+# Restore dependencies binaries
+chown -R "$app:$app" "$data_dir/makemkv" #TODO set perms as in make install
+mv -f "$install_dir/makemkv/bin/makemkvcon" /usr/bin/makemkvcon
+mv -f "$install_dir/makemkv/bin/mmdtsdec" /usr/bin/mmdtsdec
+mv -f "$install_dir/makemkv/bin/MakeMKV" cp /usr/share/MakeMKV
+mv -f "$install_dir/makemkv/oss/mmgplsrv" /usr/bin/mmgplsrv
+mv -f "$install_dir/makemkv/oss/mmccextr" /usr/bin/mmccextr
+mv -f "$install_dir/makemkv/oss/libmmbd.so.0" /usr/lib/libmmbd.so.0
+mv -f "$install_dir/makemkv/oss/libdriveio.so.0" /usr/lib/libdriveio.so.0
+mv -f "$install_dir/makemkv/oss/libdriveio.so.1" /usr/lib/libmakemkv.so.1
+ln -s -f /usr/bin/makemkvcon /usr/bin/sdftool
+ynh_safe_rm "$install_dir/makemkv"
+
+chown -R "$app:$app" "$data_dir/hanbrake" #TODO set perms as in make install
+mv -f "$install_dir/handbrake/HandBrakeCLI" /usr/local/bin/HandBrakeCLI
+ynh_safe_rm "$install_dir/handbrake"
 
 ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 
