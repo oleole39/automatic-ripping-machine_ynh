@@ -97,18 +97,18 @@ find "$install_dir/arm-dependencies" -mindepth 1 -maxdepth 1 ! -name "requiremen
 
 #~ _build_handbrake
 
-#~ #=================================================
-#~ # APP INITIAL CONFIGURATION
-#~ #=================================================
-#~ ynh_script_progression "Adding $app's configuration files..."
+#=================================================
+# APP INITIAL CONFIGURATION
+#=================================================
+ynh_script_progression "Adding $app's configuration files..."
 
-#~ mkdir -p "$install_dir/app_config"
-#~ ynh_config_add --template=".env" --destination="$install_dir/app_config/.env"
-#~ ynh_config_add --template="arm.yaml" --destination="$install_dir/app_config/arm.yaml"
-#~ ynh_config_add --template="apprise.yaml" --destination="$install_dir/app_config/apprise.yaml"
-#~ ynh_config_add --template=".abcde.conf" --destination="$install_dir/app_config/.abcde.conf"
+mkdir -p "$install_dir/app_config"
+ynh_config_add --template=".env" --destination="$install_dir/app_config/.env"
+ynh_config_add --template="arm.yaml" --destination="$install_dir/app_config/arm.yaml"
+ynh_config_add --template="apprise.yaml" --destination="$install_dir/app_config/apprise.yaml"
+ynh_config_add --template=".abcde.conf" --destination="$install_dir/app_config/.abcde.conf"
 
-#~ chown -R "$app:$app" "$install_dir"
+chown -R "$app:$app" "$install_dir"
 
 #~ #=================================================
 #~ # INSTALL PYTHON DEPENDENCIES
