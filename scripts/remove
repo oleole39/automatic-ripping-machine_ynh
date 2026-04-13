@@ -16,8 +16,8 @@ ynh_script_progression "Removing system configurations related to $app..."
 for dev in /dev/sr?; do
     umount -f "/mnt$dev"
     rmdir "/mnt$dev"
+    sed -i "\@${dev}    /mnt${dev}    udf,iso9660    defaults,users,utf8,ro    0    0@d" /etc/fstab
 done
-sed -i "/#added_by_yunohost_automatic_ripping_machine_package_install/d" /etc/fstab
 ynh_replace --match="#disabled_by_yunohost_automatic_ripping_machine_package_install#" --replace="" --file="/etc/fstab"
 
 # Remove udev rule
@@ -56,8 +56,9 @@ ldconfig
 ynh_safe_rm /usr/local/bin/HandBrakeCLI
 
 # remove libdvdcss2 (this package was installed via the install script, not by core)
+echo $was_libdvdcss2_originally_installed 
 if [ $was_libdvdcss2_originally_installed == "false" ]; then
-    apt remove libdvdcss2
+    apt --yes remove libdvdcss2
 fi
 
 #=================================================
