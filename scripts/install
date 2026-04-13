@@ -11,6 +11,9 @@ source /usr/share/yunohost/helpers
 # INITIALIZE AND STORE SETTINGS
 #=================================================
 
+was_libdvdcss2_originally_installed="false"
+ynh_app_setting_set --key=was_libdvdcss2_originally_installed --value="$was_libdvdcss2_originally_installed"
+
 makemkv_version=$(_read_manifest_resource_version "makemkv_bin")
 ynh_app_setting_set --key=makemkv_version --value="$makemkv_version"
 
@@ -67,8 +70,11 @@ ynh_app_setting_set --key=notifications_config_path --value="$notifications_conf
 #=================================================
 ynh_script_progression "Setting up source files..."
 
-# Install libdvdcss, used by libdvd-pkg which was installed via apt
-dpkg-reconfigure --frontend=noninteractive libdvd-pkg
+# Install libdvdcss2 package
+if [ $(dpkg-query -W -f='${Status}' libdvdcss2 2>/dev/null | grep -c "ok installed") -eq 1 ]; then
+    ynh_app_setting_set --key=was_libdvdcss2_originally_installed --value="true"
+fi
+dpkg-reconfigure --frontend=noninteractive libdvd-pkg #install script is provided with libdvd-pkg
 
 # Download, check integrity, uncompress and patch the source from manifest.toml
 ynh_setup_source --dest_dir="$install_dir"
@@ -133,12 +139,10 @@ ynh_config_add_logrotate
 ynh_config_add --template="udev.rules" --destination="$install_dir/app_config/51-automatic-ripping-machine-venv.rules"
 ln -sf "$install_dir/app_config/51-automatic-ripping-machine-venv.rules" /lib/udev/rules.d
 
-# Configure automount for the optical drive
+# Configure automount for the optical drives
 for dev in /dev/sr?; do
-    grep -q "${dev}    /mnt${dev}    udf,iso9660    defaults,users,utf8,ro    0    0" /etc/fstab
-    if [ $? -ne 0 ]; then
-        echo -e "${dev}    /mnt${dev}    udf,iso9660    defaults,users,utf8,ro    0    0 " | tee -a /etc/fstab
-    fi
+    ynh_replace --match="^${dev}" --replace="#disabled_by_yunohost_automatic_ripping_machine_package_install#${dev}" --file="/etc/fstab"
+    echo -e "${dev}    /mnt${dev}    udf,iso9660    defaults,users,utf8,ro    0    0 #added_by_yunohost_automatic_ripping_machine_package_install" | tee -a /etc/fstab
     mkdir -p "/mnt$dev"
 done
 
