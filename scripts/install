@@ -88,14 +88,14 @@ find "$install_dir/arm-dependencies" -mindepth 1 -maxdepth 1 ! -name "requiremen
 #=================================================
 ynh_script_progression "Building MakeMKV (this can take some time)..."
 
-#~ _build_makemkv
+_build_makemkv
 
 #=================================================
 # BUILD HANDBRAKE CLI
 #=================================================
 ynh_script_progression "Building Handbrake CLI (this will take even more time)..."
 
-#~ _build_handbrake
+_build_handbrake
 
 #=================================================
 # APP INITIAL CONFIGURATION
@@ -114,11 +114,11 @@ chown -R "$app:$app" "$install_dir"
 # INSTALL PYTHON DEPENDENCIES
 #=================================================
 
-#~ pushd $install_dir
-	#~ ynh_exec_as_app python3 -m venv $install_dir/venv
-	#~ ynh_hide_warnings ynh_exec_as_app $install_dir/venv/bin/pip install --upgrade pip wheel
-	#~ ynh_hide_warnings ynh_exec_as_app $install_dir/venv/bin/pip install -r requirements.txt
-#~ popd
+pushd $install_dir
+	ynh_exec_as_app python3 -m venv $install_dir/venv
+	ynh_hide_warnings ynh_exec_as_app $install_dir/venv/bin/pip install --upgrade pip wheel
+	ynh_hide_warnings ynh_exec_as_app $install_dir/venv/bin/pip install -r requirements.txt
+popd
 
 #=================================================
 # SYSTEM CONFIGURATION
