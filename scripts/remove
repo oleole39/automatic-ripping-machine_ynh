@@ -58,7 +58,7 @@ ynh_safe_rm /usr/local/bin/HandBrakeCLI
 # remove libdvdcss2 (this package was installed via the install script, not by core)
 echo $was_libdvdcss2_originally_installed 
 if [ $was_libdvdcss2_originally_installed == "false" ]; then
-    apt --yes remove libdvdcss2
+    ynh_hide_warnings apt --yes remove libdvdcss2
 fi
 
 #=================================================
