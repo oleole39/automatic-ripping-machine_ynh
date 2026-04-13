@@ -141,7 +141,7 @@ ln -sf "$install_dir/app_config/51-automatic-ripping-machine-venv.rules" /lib/ud
 
 # Configure automount for the optical drives
 for dev in /dev/sr?; do
-    ynh_replace --match="^${dev}" --replace="#disabled_by_yunohost_automatic_ripping_machine_package_install#${dev}" --file="/etc/fstab"*
+    ynh_replace --match="^${dev}" --replace="#disabled_by_yunohost_automatic_ripping_machine_package_install#${dev}" --file="/etc/fstab"
     echo -e "${dev}    /mnt${dev}    udf,iso9660    defaults,users,utf8,ro    0    0" | tee -a /etc/fstab
     mkdir -p "/mnt$dev"
 done
