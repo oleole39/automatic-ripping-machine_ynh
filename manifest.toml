@@ -41,6 +41,8 @@ non-free-dependencies.fr = "Pour ripper des DVD ou des Bluray, MakeDVD est utili
     [install.init_main_permission]
     type = "group"
     default = "all_users"
+    help.en = "This app is not meant to be exposed publicly. Do not set to \"visitors\"."
+    help.fr = "Cette app n'est pas faite pour petre exposée publiquement. Ne pas régler sur \"visitors\"."
 
 [resources]
     [resources.sources]
